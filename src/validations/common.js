@@ -7,10 +7,10 @@ export function validateBodyRequest(req, next, schema) {
 		allowUnknown: true,
 		stripUnknown: true,
 	}
-
 	const { error, value } = schema.validate(req.body, options)
 	if (error?.message) {
-		throw new InvalidPropertyError(error.message)
+		const err = new InvalidPropertyError(error.message)
+		next(err)
 	}
 
 	if (error) {
@@ -29,15 +29,10 @@ export function validateQueryRequest(req, next, schema) {
 		stripUnknown: true,
 	}
 
-	const { error, value } = schema.validate(req.body, options)
+	const { error, value } = schema.validate(req.query, options)
 	if (error?.message) {
-		throw new InvalidPropertyError(error.message)
-	}
-
-	if (error) {
-		//   throw new RequiredParameterError(
-		//     `${error.details.map((x) => x.message).join(", ")}`
-		//   );
+		const err = new InvalidPropertyError(error.message)
+		next(err)
 	}
 	req.query = value
 	next()
@@ -52,7 +47,8 @@ export function validateParamRequest(req, next, schema) {
 
 	const { error, value } = schema.validate(req.body, options)
 	if (error?.message) {
-		throw new InvalidPropertyError(error.message)
+		const err = new InvalidPropertyError(error.message)
+		next(err)
 	}
 
 	if (error) {

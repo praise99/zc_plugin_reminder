@@ -6,10 +6,17 @@ module.exports = {
 		jest: true,
 	},
 	parser: 'babel-eslint',
-	plugins: ['react'],
+	plugins: ['react', 'prettier'],
 	extends: ['plugin:prettier/recommended', 'plugin:react/recommended'],
 	rules: {
-		'prettier/prettier': ['error', { endOfLine: 'auto' }],
+		'prettier/prettier': [
+			'error',
+			{
+				endOfLine: 'auto',
+			},
+		],
+		'react/prop-types': 0,
+		'prettier/prettier': ['warn', { endOfLine: 'auto' }],
 		indent: ['error', 2],
 		'arrow-body-style': 'off',
 		'prefer-const': ['error'],
@@ -41,7 +48,7 @@ module.exports = {
 		'prefer-arrow-callback': ['error'],
 		'implicit-arrow-linebreak': ['error'],
 		'no-useless-constructor': ['error'],
-		'no-unused-vars': ['error'],
+		'no-unused-vars': ['warn'],
 		eqeqeq: ['error'],
 		semi: ['error', 'never'],
 		'eol-last': 0,
@@ -58,8 +65,7 @@ module.exports = {
 				'react/require-default-props': 'off', // Allow non-defined react props as undefined
 				'import/prefer-default-export': 'off',
 				'@typescript-eslint/no-unused-vars': 'off',
-				'unused-imports/no-unused-imports': 'error',
-				'unused-imports/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+				'unused-imports/no-unused-imports': 'warn',
 				'react/no-multi-comp': [1, { ignoreStateless: true }],
 				'react/jsx-filename-extension': [1, { allow: 'as-needed' }],
 				'react/jsx-pascal-case': 1,
